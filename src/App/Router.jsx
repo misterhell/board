@@ -4,7 +4,7 @@ import Board from './Boards/Board'
 
 
 import {
-    BrowserRouter as BrowserRouter,
+    BrowserRouter,
     Switch,
     Route,
     Link
