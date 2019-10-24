@@ -1,12 +1,18 @@
 import React from 'react';
-import './resources/App.css';
+import './resources/App.sass';
 
 import Router from './App/Router'
+import Nav from './App/Navbar'
 
 function App() {
   return (
-    <div className="App">
-      <Router />
+    <div className="app">
+      <div className="app-nav">
+        <Nav />
+      </div>
+      <div className="app-body">
+        <Router />
+      </div>
     </div>
   );
 }
