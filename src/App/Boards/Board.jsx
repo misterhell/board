@@ -18,9 +18,11 @@ class Board extends Component {
 
         return (
             <div>
-                <div> board ({this.id}) name: <strong>{this.name}</strong> </div>
+                <div> board ({this.id}): <strong>{this.name}</strong> </div>
 
-                {columns.map(col => <Column key={col.id} name={col.name}/>)}
+                <div className="board-all-columns">
+                    {columns.map(col => <Column key={col.id} name={col.name}/>)}
+                </div>
             </div>
         );
     }

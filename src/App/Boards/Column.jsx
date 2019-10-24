@@ -16,7 +16,7 @@ const cards = [
 export default class Column extends Component {
   render() {
     return (
-      <div>
+      <div className="board-column">
         <div> column: {this.props.name} </div>
         <div>
           cards:

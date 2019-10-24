@@ -15,7 +15,7 @@ export default class BoardsList extends Component {
     render() {
         return (
             <div>
-                <div> boards list </div>
+                <h2>My boards list</h2>
                 <ul>
                     {
                         boardsList.map(board => <li key={board.id}>
