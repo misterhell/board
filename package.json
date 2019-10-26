@@ -14,7 +14,7 @@
     "redux-thunk": "^2.3.0"
   },
   "scripts": {
-    "start": "cd ./server/ && docker-compose up -d && cd .. && react-scripts start",
+    "start": "cd ./server/ && docker-compose up -d --build && cd .. && react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
