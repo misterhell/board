@@ -1,4 +1,3 @@
-import { Exception } from 'handlebars'
 const MongoClient = require('mongodb').MongoClient
 
 
@@ -14,6 +13,9 @@ const CONNECTION_OPTIONS = {
 
 const DB_NAME = 'boars-db'
 
+
+const errFn = err => console.error(err)
+
 class Mongo {
 
     client = null
@@ -21,13 +23,7 @@ class Mongo {
     db = null
 
     constructor() {
-        MongoClient
-            .connect(MONGO_URL, CONNECTION_OPTIONS)
-            .then(client => {
-                this.client = client
-                this.setDb(DB_NAME)
-            })
-            .catch(err => { throw new Error(err) })
+        this.connectToDb()
     }
 
 
@@ -36,8 +32,44 @@ class Mongo {
     }
 
 
-    addBoard() {
-        
+    createBoard(board) {
+        return this.getDb()
+                .then(db => db.collection('boards').insertOne(board))
+                .catch(errFn)
+    }
+
+    /**
+     * return <Promise>
+     */
+    fetchBoards() {
+        return this.getDb()
+            .then(
+                db => db.collection('boards')
+                    .find()
+                    .toArray()
+            )
+            .catch(errFn)
+    }
+
+    getDb() {
+        return new Promise((resolve, reject) => {
+            if (this.db) resolve(this.db)
+
+            this.connectToDb()
+                .then(db => resolve(db))
+                .catch(errFn)
+        })
+    }
+
+    connectToDb() {
+        return MongoClient
+            .connect(MONGO_URL, CONNECTION_OPTIONS)
+            .then(client => {
+                this.client = client
+                this.setDb(DB_NAME)
+                return this.db
+            })
+            .catch(err => { throw new Error(err) })
     }
 
 
@@ -45,4 +77,4 @@ class Mongo {
 
 
 
-export default new Mongo()
+module.exports = new Mongo()
