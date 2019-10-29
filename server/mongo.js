@@ -16,13 +16,13 @@ class Mongo {
     }
 
 
-
     createBoard(board) {
         return this.getDb()
             .then(db => db.collection('boards').insertOne(board))
             .catch(errFn)
     }
 
+    
     /**
      * return <Promise>
      */
@@ -35,6 +35,7 @@ class Mongo {
             )
             .catch(errFn)
     }
+
 
     connectToDb() {
         return MongoClient
