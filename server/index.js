@@ -5,6 +5,7 @@ const app = express()
 
 const DB = require('./mongo')
 
+app.use(express.urlencoded())
 
 
 const testFn = () => {
@@ -23,7 +24,7 @@ app.get('/', (req, res) => {
 
 
 app.post('/api/boards/create', (req, res) => {
-  console.log('res :', res);
+  console.log('hi :', req.body);
 })
 
 app.get('/api/boards', (req, res) => {

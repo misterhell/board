@@ -16,6 +16,7 @@ export const fetchBoards = () => dispatch => {
 
 
 export const addBoard = board => dispatch => {
+    console.log('add action')
     fetch('/api/boards/create', {
         method: 'post',
         body: JSON.stringify(board)
