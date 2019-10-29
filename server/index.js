@@ -23,7 +23,7 @@ app.get('/', (req, res) => {
 
 
 app.post('/api/boards/create', (req, res) => {
-
+  console.log('res :', res);
 })
 
 app.get('/api/boards', (req, res) => {

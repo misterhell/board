@@ -1,23 +1,23 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
+import { Link } from 'react-router-dom'
+import { connect } from 'react-redux'
+import { fetchBoards } from '../actions/boardAction'
 
-import { Link } from "react-router-dom";
+class BoardsList extends Component {
 
-const boardsList = [
+    componentWillMount() {
+        this.props.fetchBoards()
+    }
 
-    { name: 'board 1', id: 1 },
-    { name: 'board 2', id: 2 },
-    { name: 'board 3', id: 3 },
-];
 
-export default class BoardsList extends Component {
     render() {
         return (
             <div>
                 <h2>My boards list</h2>
                 <ul>
                     {
-                        boardsList.map(board => <li key={board.id}>
-                            <Link to={`/board/${board.id}`}>{board.name}</Link>
+                        this.props.boards.map(board => <li key={board._id}>
+                            <Link to={`/board/${board._id}`}>{board.name}</Link>
                         </li>)
                     }
                 </ul>
@@ -25,3 +25,10 @@ export default class BoardsList extends Component {
         );
     }
 }
+
+
+const mapStateProps = state => ({
+    boards: state.boards.items
+})
+
+export default connect(mapStateProps, { fetchBoards })(BoardsList)
