@@ -4,10 +4,9 @@ import { connect } from 'react-redux'
 import { fetchBoards } from '../actions/boardAction'
 import BoardWrapper from './Boards/BoardWrapper'
 import CreateNewBoard from './Boards/BoardCreate'
-import BoardContent from './Boards/BoardContent'
 class BoardsList extends Component {
 
-    componentWillMount() {
+    componentDidMount() {
         this.props.fetchBoards()
     }
 

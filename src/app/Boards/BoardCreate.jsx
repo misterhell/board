@@ -16,11 +16,9 @@ class BoardCreate extends Component {
         name: ''
     })
 
-    componentWillMount() {
+    componentDidMount() {
         this.setDefaultSate()
     }
-
-
 
 
     handleAddNewClick = () => {
@@ -37,7 +35,7 @@ class BoardCreate extends Component {
     }
 
     onInputBlur = () => {
-        if (this.state.name == '')
+        if (this.state.name === '')
             this.setDefaultSate()
     }
 
