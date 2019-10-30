@@ -56,5 +56,20 @@
 .btn
     border: none
     text-decoration: none
-    padding: 0.8em 1em
-    .btn-success
+    padding: 0.6em 0.8em
+    border-radius: 0.2em
+    &.btn-primary
+        color: white
+        background-color: #1aa0ee
+        border: 1px solid #158ace
+        &:hover
+            background-color: #1aa0ee * 1.1
+            border: 1px solid #158ace * 1.1
+
+.add-board-input
+    padding: 5px 10px
+    margin: 2px 0 5px
+    border-radius: 0.2em
+    border: 1px solid lightgray
+    &.has-error
+        border-color: red

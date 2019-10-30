@@ -1,10 +1,17 @@
 import { FETCH_BOARDS, NEW_BOARD } from './types'
 
 
+const postParams = {
+    method: 'post',
+    headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+    },
+}
 
 
-export const fetchBoards = () => dispatch => {
-    fetch('/api/boards')
+export const fetchBoards = () =>
+    dispatch => fetch('/api/boards')
         .then(res => res.json())
         .then(boards =>
             dispatch({
@@ -12,18 +19,13 @@ export const fetchBoards = () => dispatch => {
                 payload: boards
             })
         )
-}
 
 
-export const addBoard = board => dispatch => {
-    console.log('------------------- add action', board)
-    fetch('/api/boards/create', {
-        method: 'post',
-        body: JSON.stringify(board),
-        headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json'
-        },
+
+export const addBoard = board =>
+    dispatch => fetch('/api/boards/create', {
+        ...postParams,
+        body: JSON.stringify(board)
     })
         .then(res => res.json())
         .then(respBoard =>
@@ -32,4 +34,3 @@ export const addBoard = board => dispatch => {
                 payload: respBoard
             })
         )
-}

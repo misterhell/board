@@ -8,11 +8,19 @@ class BoardCreate extends Component {
     constructor(props) {
         super(props)
 
-        this.state = {
-            clickedNew: false,
-            name: ''
-        };
+        this.state = {};
     }
+
+    setDefaultSate = () => this.setState({
+        clickedNew: false,
+        name: ''
+    })
+
+    componentWillMount() {
+        this.setDefaultSate()
+    }
+
+
 
 
     handleAddNewClick = () => {
@@ -28,10 +36,17 @@ class BoardCreate extends Component {
         })
     }
 
+    onInputBlur = () => {
+        if (this.state.name == '')
+            this.setDefaultSate()
+    }
+
 
     addNewBoard = () => {
-        console.log('add')
         this.props.addBoard({ name: this.state.name })
+            .then(() => {
+                this.setDefaultSate()
+            })
     }
 
 
@@ -42,12 +57,16 @@ class BoardCreate extends Component {
                     this.state.clickedNew ?
                         (
                             <div>
-                                <input placeholder="name" type="text"
+                                <input className="add-board-input"
+                                    placeholder="name"
+                                    type="text"
+                                    autoFocus
+                                    onBlur={this.onInputBlur}
                                     value={this.state.name}
                                     onChange={this.onInput}
                                 />
 
-                                <button className="btn btn-success"
+                                <button className="btn btn-primary"
                                     onClick={this.addNewBoard}>
                                     Create
                                 </button>
