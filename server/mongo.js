@@ -9,20 +9,21 @@ const errFn = err => console.error(err)
 
 class Mongo {
 
-    client = null
-
     constructor() {
         this.connectToDb()
     }
 
 
     createBoard(board) {
-        return this.getDb()
-            .then(db => db.collection('boards').insertOne(board))
+        return this.connectToDb()
+            .then(
+                db => db.collection('boards')
+                    .insertOne(board)
+            )
             .catch(errFn)
     }
 
-    
+
     /**
      * return <Promise>
      */
@@ -41,8 +42,7 @@ class Mongo {
         return MongoClient
             .connect(params.MONGO_URL, params.MONGO_CONNECTION_OPTIONS)
             .then(client => {
-                this.client = client
-                return this.client.db(params.DB_NAME)
+                return client.db(params.DB_NAME)
             })
             .catch(err => { throw new Error(err) })
     }

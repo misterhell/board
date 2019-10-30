@@ -16,16 +16,20 @@ export const fetchBoards = () => dispatch => {
 
 
 export const addBoard = board => dispatch => {
-    console.log('add action')
+    console.log('------------------- add action', board)
     fetch('/api/boards/create', {
         method: 'post',
-        body: JSON.stringify(board)
+        body: JSON.stringify(board),
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        },
     })
         .then(res => res.json())
-        .then(board =>
+        .then(respBoard =>
             dispatch({
                 type: NEW_BOARD,
-                payload: board
+                payload: respBoard
             })
         )
 }

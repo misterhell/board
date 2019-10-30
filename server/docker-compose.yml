@@ -2,7 +2,7 @@ version: "3"
 services:
 
   app:
-    container_name: app
+    container_name: tr_app
     restart: always
     build: .
     volumes: 

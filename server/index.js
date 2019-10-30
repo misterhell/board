@@ -5,15 +5,9 @@ const app = express()
 
 const DB = require('./mongo')
 
-app.use(express.urlencoded())
+app.use(express.urlencoded(), express.json())
 
 
-const testFn = () => {
-
-  DB.fetchBoards().then(resp => {
-    console.log('resp :', resp)
-  })
-}
 
 app.get('/', (req, res) => {
 
@@ -24,7 +18,10 @@ app.get('/', (req, res) => {
 
 
 app.post('/api/boards/create', (req, res) => {
-  console.log('hi :', req.body);
+  DB.createBoard(req.body)
+    .then(board => {
+      res.json(board.ops.pop())
+    })
 })
 
 app.get('/api/boards', (req, res) => {
@@ -33,7 +30,3 @@ app.get('/api/boards', (req, res) => {
 })
 
 app.listen(port, () => console.log(`EXPRESS APP LISTEN ${port}!`))
-
-
-
-// testFn()
