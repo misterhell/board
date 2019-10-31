@@ -18,7 +18,7 @@ class BoardsList extends Component {
                     My boards list
                     </div>
 
-                <div className={'boards-list'}>
+                <div className="boards-list">
                     {
                         this.props.boards.map(board =>
                             <BoardWrapper key={board._id}>

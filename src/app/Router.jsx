@@ -18,7 +18,7 @@ class Router extends Component {
         return (
             <BrowserRouter>
                 <Switch>
-                    <Route exact path="/">
+                    <Route exact path="/" >
                         <BoardsList />
                     </Route>
 

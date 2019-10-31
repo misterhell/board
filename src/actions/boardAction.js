@@ -1,4 +1,4 @@
-import { FETCH_BOARDS, NEW_BOARD } from './types'
+import { FETCH_BOARDS, NEW_BOARD, OPEN_BOARD } from './types'
 
 
 const postParams = {
@@ -34,3 +34,18 @@ export const addBoard = board =>
                 payload: respBoard
             })
         )
+
+
+export const openBoard = boardId =>
+    dispatch => dispatch({
+        type: OPEN_BOARD,
+        payload: {
+            boardId
+        }
+    })
+
+export const fetchAndOpen = boardId =>
+    dispatch => dispatch(fetchBoards())
+        .then(() => dispatch(openBoard(boardId)))
+
+

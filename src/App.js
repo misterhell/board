@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import './resources/App.sass'
 
 import Router from './app/Router'

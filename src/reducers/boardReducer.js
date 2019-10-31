@@ -1,8 +1,9 @@
-import { FETCH_BOARDS, NEW_BOARD } from '../actions/types'
+import { FETCH_BOARDS, NEW_BOARD, OPEN_BOARD } from '../actions/types'
 
 
 const initialState = {
-    items: []
+    items: [],
+    selected: null,
 }
 
 
@@ -21,6 +22,11 @@ export default (state = initialState, action) => {
                 items: action.payload
             }
 
+        case OPEN_BOARD:
+            return {
+                ...state,
+                selected: state.items.find(b => b._id === action.payload.boardId)
+            }
 
         default:
             return state
