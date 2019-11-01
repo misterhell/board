@@ -7,9 +7,9 @@ class Board extends Component {
 
     componentDidMount() {
         const boardId = this.props.match.params.id
-        const boardsLoaded = !this.props.allBoards || !this.props.allBoards.length
+        const isBoardsLoaded = !this.props.allBoards || !this.props.allBoards.length
 
-        boardsLoaded
+        isBoardsLoaded
             ? this.props.fetchAndOpen(boardId)
             : this.props.openBoard(boardId)
 
