@@ -12,7 +12,7 @@ class Board extends Component {
         isBoardsLoaded
             ? this.props.fetchAndOpen(boardId)
             : this.props.openBoard(boardId)
- 
+
     }
 
     render() {
@@ -28,7 +28,16 @@ class Board extends Component {
                             <div> board ({this.props.board._id}): <strong>{this.props.board.name}</strong> </div>
 
                             <div className="board-all-columns">
-                                {/* {columns.map(col => <Column key={col.id} name={col.name} />)} */}
+                                {
+                                    this.props.board.columns
+                                        ? (
+                                            this.props.board.columns.map(col => <Column key={col.id} name={col.name} />)
+                                        )
+
+                                        : (
+                                            <div>No Cards</div>
+                                        )
+                                }
                             </div>
                         </div>
                     )
