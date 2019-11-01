@@ -12,7 +12,7 @@ class Board extends Component {
         isBoardsLoaded
             ? this.props.fetchAndOpen(boardId)
             : this.props.openBoard(boardId)
-
+ 
     }
 
     render() {
