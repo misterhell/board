@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
-import Column from './Column'
+import Column from '../Columns/Column'
+import AddColumn from '../Columns/AddColumn'
+
 import { connect } from 'react-redux'
 import { openBoard, fetchBoards, fetchAndOpen } from '../../actions/boardAction'
 import store from '../../store'
@@ -25,19 +27,28 @@ class Board extends Component {
                     )
                     : (
                         <div>
-                            <div> board ({this.props.board._id}): <strong>{this.props.board.name}</strong> </div>
+                            <div> board: <strong>{this.props.board.name}</strong> </div>
 
                             <div className="board-all-columns">
                                 {
                                     this.props.board.columns
                                         ? (
-                                            this.props.board.columns.map(col => <Column key={col.id} name={col.name} />)
+                                            this.props.board.columns.map(col => <Column key={col.id} column={col} />)
                                         )
 
                                         : (
                                             <div>No Cards</div>
                                         )
                                 }
+                                <AddColumn />
+                                <AddColumn />
+                                <AddColumn />
+                                <AddColumn />
+                                <AddColumn />
+                                <AddColumn />
+                                <AddColumn />
+                                <AddColumn />
+
                             </div>
                         </div>
                     )

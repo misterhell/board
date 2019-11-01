@@ -39,6 +39,8 @@ class BoardCreate extends Component {
             this.setDefaultSate()
     }
 
+    onAddingHide = () => this.setDefaultSate()
+
 
     addNewBoard = () => {
         this.props.addBoard({ name: this.state.name })
@@ -67,6 +69,10 @@ class BoardCreate extends Component {
                                 <button className="btn btn-primary"
                                     onClick={this.addNewBoard}>
                                     Create
+                                </button>
+                                <button className="btn"
+                                    onClick={this.onAddingHide}>
+                                    x
                                 </button>
                             </div>
                         ) : (

@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 export default class Card extends Component {
   render() {
     return (
-      <span> {this.props.params.title} </span>
+      <span> {this.props.params.name} </span>
     );
   }
 }
