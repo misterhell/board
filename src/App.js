@@ -1,20 +1,18 @@
-import './assets/App.sass'
-import React, { useEffect } from 'react'
+import 'assets/App.sass'
+import React from 'react'
 import { createStore, applyMiddleware, compose } from 'redux';
 import { Provider } from 'react-redux'
 import thunk from 'redux-thunk';
-import rootReducer from './store/reducers'
+import rootReducer from 'store/reducers'
 
 
-import Router from './components/Router'
-import Nav from './components/Navbar'
+import Router from 'components/Router'
+import Nav from 'components/Navbar'
 
-
-console.log(process.env);
 
 const store = createStore(
   rootReducer,
-  [],
+  {},
   compose(
     applyMiddleware(...[thunk]),
     window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()

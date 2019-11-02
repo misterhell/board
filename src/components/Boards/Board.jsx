@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
-import Column from '../Columns/Column'
-import AddColumn from '../Columns/AddColumn'
+import Column from 'components/Columns/Column'
+import AddColumn from 'components/Columns/AddColumn'
 
 import { connect } from 'react-redux'
-import { openBoard, fetchAndOpen } from '../../store/boards/actions'
+import { openBoard, fetchAndOpen } from 'store/boards/actions'
 
 
 
@@ -35,7 +35,7 @@ class Board extends Component {
                                 {
                                     this.props.board.columns
                                         ? (
-                                            this.props.board.columns.map(col => <Column key={col.id} column={col} />)
+                                            this.props.board.columns.map((col, i) => <Column key={i} column={col} />)
                                         )
 
                                         : (

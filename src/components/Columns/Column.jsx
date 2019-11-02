@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Card from '../Cards/Card';
+import Card from 'components/Cards/Card';
 
 
 export default class Column extends Component {
@@ -12,8 +12,8 @@ export default class Column extends Component {
           <ul>
             {
               this.props.column.cards.map(
-                card =>
-                  <li key={card.id}>
+                (card, i)=>
+                  <li key={i}>
                     <Card params={card} />
                   </li>
               )

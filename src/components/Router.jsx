@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import BoardsList from './BoardsList';
-import Board from './Boards/Board'
+import BoardsList from 'components/BoardsList';
+import Board from 'components/Boards/Board'
 
 
 import {
