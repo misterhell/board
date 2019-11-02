@@ -3,8 +3,10 @@ import Column from '../Columns/Column'
 import AddColumn from '../Columns/AddColumn'
 
 import { connect } from 'react-redux'
-import { openBoard, fetchBoards, fetchAndOpen } from '../../actions/boardAction'
-import store from '../../store'
+import { openBoard, fetchAndOpen } from '../../store/boards/actions'
+
+
+
 class Board extends Component {
 
     componentDidMount() {
@@ -37,18 +39,10 @@ class Board extends Component {
                                         )
 
                                         : (
-                                            <div>No Cards</div>
+                                            <div></div>
                                         )
                                 }
-                                <AddColumn />
-                                <AddColumn />
-                                <AddColumn />
-                                <AddColumn />
-                                <AddColumn />
-                                <AddColumn />
-                                <AddColumn />
-                                <AddColumn />
-
+                                <AddColumn boardId={this.props.board._id} />
                             </div>
                         </div>
                     )

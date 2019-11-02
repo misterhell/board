@@ -1,4 +1,4 @@
-import { FETCH_BOARDS, NEW_BOARD, OPEN_BOARD } from '../actions/types'
+import { FETCH_BOARDS, NEW_BOARD, OPEN_BOARD } from './actions'
 
 
 const initialState = {

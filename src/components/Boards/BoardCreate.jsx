@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { addBoard } from '../../actions/boardAction'
+import { addBoard } from '../../store/boards/actions'
 
 
 class BoardCreate extends Component {

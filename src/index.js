@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './resources/index.sass';
+import './assets/index.sass';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 

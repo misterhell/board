@@ -1,0 +1,2 @@
+export const NEW_COLUMN = 'NEW_COLUMN'
+export const DELETE_COLUMN = 'DELETE_COLUMN'

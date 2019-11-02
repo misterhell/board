@@ -16,9 +16,13 @@ class AddColumn extends Component {
   }
 
 
-  onClickNew = () => this.setState({
-    addingNew: true
-  })
+  onClick = () => {
+    if (!this.state.addingNew) {
+      this.setState({
+        addingNew: true
+      })
+    }
+  }
 
   onInputChange = ev => this.setState({
     value: ev.target.value
@@ -26,7 +30,7 @@ class AddColumn extends Component {
 
   addNewColumn = ev => {
     if (this.state.value !== '') {
-      console.log('add!')
+      console.log('add!', this.props.boardId)
     }
   }
 
@@ -39,7 +43,7 @@ class AddColumn extends Component {
 
 
     return (
-      <div className="board-column create-column">
+      <div className="board-column create-column" onClick={this.onClick}>
         {
           this.state.addingNew
             ? (
@@ -56,11 +60,10 @@ class AddColumn extends Component {
               </React.Fragment>
             )
             : (
-              <div onClick={this.onClickNew}>
+              <div>
                 + Create new column
-                </div>
+              </div>
             )
-
         }
       </div>
     );
