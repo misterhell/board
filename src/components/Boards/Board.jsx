@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { openBoard, fetchAndOpen } from 'store/boards/actions'
-import PropTypes from 'prop-types'
 
 import Column from 'components/Columns/Column'
 import AddColumn from 'components/Columns/AddColumn'
@@ -20,23 +19,44 @@ class Board extends Component {
             ? this.props.fetchAndOpen(boardId)
             : this.props.openBoard(boardId)
 
-        this.draggedColumn = null
+        this.draggingColumn = null
     }
 
-    onColumnDrag = ev => {
-        ev.dataTransfer.effectAllowed = 'move'
-        ev.dataTransfer.dropEffect = 'move'
-        ev.dataTransfer.setData('dragged-element', 'text-to-drag');
-        
+    onColumnDrag = (ev, id) => {
 
-        this.draggedColumn = ev.target
+
+
+        this.draggingColumn = this.ejectColumnFromBoard(ev.target)
+    }
+
+    pasteElementTo(toEl) {
+        const colEl = this.draggingColumn.el
+        colEl.parentNode.removeChild(colEl)
+
+        toEl.appendChild(colEl)
+
+        this.draggingColumn = null
+    }
+
+    ejectColumnFromBoard = htmlEl => {
+        const el = htmlEl,
+            elObj = {
+                el: el,
+                height: el.clientHeight,
+                width: el.clientWidth
+            }
+        console.log(elObj)
+
+
+        return elObj
     }
 
     onColumnDrop = ev => {
-        
-        console.log('drop',ev)
-        console.log(ev.dataTransfer.getData('element-id'))
-        this.draggedColumn = ev.target
+
+        console.log('drop', ev)
+
+        this.pasteElementTo(ev.target)
+        this.draggedColumn = null
     }
 
 
@@ -44,14 +64,13 @@ class Board extends Component {
         return this.props.board.columns = this.props.board.columns || []
     }
 
+    isDraggedColumn = colId => colId == 1
+
 
     render() {
 
-
         if (this.props.board === null)
             return <span>Loading ...</span>
-
-
 
 
         return (
@@ -63,7 +82,11 @@ class Board extends Component {
                         this.getColumns()
                             .map((col, i) => {
                                 return (
-                                    <ColumnWrapper key={i} drop={this.onColumnDrop}>
+                                    <ColumnWrapper key={i}
+                                        isDragged={this.isDraggedColumn(i)}
+                                        id={i}
+                                        drop={this.onColumnDrop}
+                                    >
                                         <Column
                                             id={i}
                                             column={col}

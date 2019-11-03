@@ -7,13 +7,11 @@ class AddColumn extends Component {
     value: ''
   }
 
-  constructor(props) {
-    super(props)
-
-    this.state = {
-      ...this.defaultState
-    };
+  
+  state = {
+    ...this.defaultState
   }
+
 
 
   onClick = () => {

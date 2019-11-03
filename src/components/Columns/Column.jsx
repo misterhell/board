@@ -3,27 +3,32 @@ import PropTypes from 'prop-types'
 import Card from 'components/Cards/Card';
 
 
-export default class Column extends Component {
+class Column extends Component {
+
+  static propTypes = {
+    dragging: PropTypes.func
+  }
+
 
   onDragStart = ev => {
     ev.dataTransfer.setData('element-id', ev.target.getAttribute('id'))
 
-    this.props.dragging(ev)
+    this.props.dragging(ev, this.id)
   }
 
   render() {
     return (
-      <div id={`column-${this.props.id}`} 
-      className="board-column" 
-      draggable 
-      onDragStart={this.onDragStart}>
+      <div id={`column-${this.props.id}`}
+        className="board-column"
+        draggable
+        onDragStart={this.onDragStart}>
         <div> column: {this.props.column.title} </div>
         <div>
           cards:
           <ul>
             {
               this.props.column.cards.map(
-                (card, i)=>
+                (card, i) =>
                   <li key={i}>
                     <Card params={card} />
                   </li>
@@ -36,6 +41,6 @@ export default class Column extends Component {
   }
 }
 
-Column.propTypes = {
-  onDrag: PropTypes.func
-}
+
+
+export default Column

@@ -5,11 +5,11 @@ import { addBoard } from 'store/boards/actions'
 
 class BoardCreate extends Component {
 
-    constructor(props) {
-        super(props)
+    state = {
+        clickedNew: false
+    };
 
-        this.state = {};
-    }
+
 
     setDefaultSate = () => this.setState({
         clickedNew: false,
@@ -92,6 +92,12 @@ class BoardCreate extends Component {
     }
 }
 
+export default connect(null, { addBoard })(BoardCreate);
+
+
+
+
+
 
 const styles = {
     block: {
@@ -112,6 +118,3 @@ const styles = {
 
     }
 }
-
-
-export default connect(null, { addBoard })(BoardCreate);

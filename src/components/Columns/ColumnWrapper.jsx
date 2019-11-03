@@ -11,6 +11,12 @@ class ColumnWrapper extends Component {
     this.dragCounter = 0
   }
 
+  static propTypes = {
+    drop: PropTypes.func
+  }
+
+  
+
   getRefEl = () => this.colWrapperRef.current
 
   onDragLeave = ev => {
@@ -36,6 +42,7 @@ class ColumnWrapper extends Component {
   }
 
   onDragOver = ev => {
+    console.log(ev)
     ev.preventDefault();
   }
 
@@ -54,7 +61,9 @@ class ColumnWrapper extends Component {
 
   render() {
     return (
-      <div ref={this.colWrapperRef} className="board-column-wrapper"
+      <div className="board-column-wrapper"
+        id={`column-wrapper-${this.props.id}`}
+        ref={this.colWrapperRef} 
         onDragLeave={this.onDragLeave}
         onDragEnter={this.onDragEnter} 
         onDragOver={this.onDragOver}
@@ -69,8 +78,6 @@ class ColumnWrapper extends Component {
 }
 
 
-ColumnWrapper.propTypes = {
-  drop: PropTypes.func
-}
+
 
 export default ColumnWrapper;
