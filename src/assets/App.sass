@@ -26,7 +26,17 @@
     align-items: flex-start
 
 .board-column-wrapper
-    display: flex    
+    border: 1px solid transparent
+    display: flex
+    min-width: 120px
+    height: 60vh;
+    &[drop-active=true]
+        border: 1px solid red
+    &[empty-col=true]
+        background-color: #00000011
+    &[empty-col=true] > .children
+        display: none
+
 
 .board-column
     display: flex
