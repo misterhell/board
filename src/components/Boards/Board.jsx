@@ -36,13 +36,13 @@ class Board extends Component {
         const { board } = this.props
 
 
-        if (board === null)
+        if (!board)
             return <span>Loading ...</span>
 
 
         return (
             <div>
-                <h5> board: <strong>{this.props.board.name}</strong> </h5>
+                <h5> board: <strong>{board.name}</strong> </h5>
 
                 <div className="board-all-columns">
                     {
