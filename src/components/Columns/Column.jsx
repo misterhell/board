@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types'
 import Card from 'components/Cards/Card';
 
@@ -6,32 +6,30 @@ import Card from 'components/Cards/Card';
 class Column extends Component {
 
   static propTypes = {
-    dragging: PropTypes.func
+    // dragging: PropTypes.func
   }
 
-
-  onDragStart = ev => {
-    ev.dataTransfer.setData('element-id', ev.target.getAttribute('id'))
-
-    this.props.dragging(ev, this.id)
+  onDragStart = e => {
+    const { _id } = this.props
+    e.dataTransfer.setData('el-id', _id)
   }
+
 
   render() {
+
+    const { title, id, cards } = this.props
+
     return (
-      <div id={`column-${this.props.id}`}
-        className="board-column"
-        draggable
-        onDragStart={this.onDragStart}>
-        <div> column: {this.props.column.title} </div>
+      <div id={`col-${id}`} draggable="true" onDragStart={this.onDragStart}>
+        <div> column: {title} </div>
         <div>
           cards:
           <ul>
             {
-              this.props.column.cards.map(
-                (card, i) =>
-                  <li key={i}>
-                    <Card params={card} />
-                  </li>
+              cards.map(card =>
+                <li key={card._id}>
+                  <Card name={card.name} />
+                </li>
               )
             }
           </ul>
