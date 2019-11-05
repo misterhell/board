@@ -1,0 +1,1 @@
+export const COLUM_WRAPPER_CLASS_NAME = 'board-column-wrapper'

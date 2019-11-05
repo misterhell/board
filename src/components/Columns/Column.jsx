@@ -6,7 +6,7 @@ import Card from 'components/Cards/Card';
 class Column extends Component {
 
   static propTypes = {
-    // dragging: PropTypes.func
+    dragging: PropTypes.func
   }
 
   onDragStart = e => {
@@ -19,14 +19,22 @@ class Column extends Component {
     setTimeout(() => {
       target.style.display = 'none'
     }, 0)
+
+
+    this.props.dragStart(e, target.id)
   }
 
-  noDragEnd = e => {
-    const { target } = e
+  onDrag = e => {
+    this.props.dragging(e)
+  }
 
+  onDragEnd = e => {
+    const { target } = e
     setTimeout(() => {
       target.style.display = ''
     }, 0)
+
+    this.props.dragEnd(e)
   }
 
 
@@ -43,7 +51,8 @@ class Column extends Component {
 
     return (
       <div id={this.elId} className="board-column" draggable="true"
-        onDragEnd={this.noDragEnd}
+        onDragEnd={this.onDragEnd}
+        onDrag={this.onDrag}
         onDragStart={this.onDragStart}
       >
         <div> column: {title} </div>

@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types'
+import { COLUM_WRAPPER_CLASS_NAME } from 'constants/columns'
 
 class ColumnWrapper extends Component {
 
   static propTypes = {
-    // drop: PropTypes.func
+    dropped: PropTypes.func
   }
 
   state = {
@@ -14,37 +15,22 @@ class ColumnWrapper extends Component {
   onDragEnter = e => {
     e.preventDefault()
     e.stopPropagation()
-    console.log('enter')
-    console.log(e.dataTransfer.getData('el-id'))
-    this.setState(({ dragEnter: old }) => ({
-      dragEnter: ++old
-    }));
+    
   }
 
   onDragLeave = e => {
-    console.log('leave')
-    console.log(e.dataTransfer.getData('el-id'))
 
-    this.setState(({ dragEnter: old }) => ({
-      dragEnter: --old
-    }))
   }
 
   onDragOver = e => {
     // prevent event to allow drop
-    console.log('over')
-    console.log(e.dataTransfer.getData('el-id'))
+    // e.preventDefault()
 
-    e.preventDefault()
   }
 
   onDrop = e => {
-    console.log('drop')
-    console.log(e.dataTransfer.getData('el-id'));
 
-    this.setState({
-      dragEnter: 0
-    })
+    this.props.dropped(e)
   }
 
 
@@ -52,7 +38,7 @@ class ColumnWrapper extends Component {
 
   render() {
     return (
-      <div className={`board-column-wrapper ${this.state.dragEnter && "active"}`}
+      <div className={COLUM_WRAPPER_CLASS_NAME}
         onDragOver={this.onDragOver}
         onDragEnter={this.onDragEnter}
         onDragLeave={this.onDragLeave}
