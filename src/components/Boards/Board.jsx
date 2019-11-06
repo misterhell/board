@@ -98,12 +98,17 @@ class Board extends Component {
     }
 
     dragEnd = () => {
+        this.removeActiveFromWrappers()
         this.setState({
             draggedCol: null,
             colWrappersOnDrag: [],
             nextTick: null
         })
-        this.removeActiveFromWrappers()
+    }
+
+
+    rearrangeCols () {
+        
     }
 
 

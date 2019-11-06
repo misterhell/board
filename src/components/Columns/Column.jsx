@@ -10,16 +10,11 @@ class Column extends Component {
   }
 
   onDragStart = e => {
-
-    const { dataTransfer, target } = e
-
-    dataTransfer.setData('el-id', this.elId)
-    dataTransfer.setData('el-parent-id', this.elId)
+    const { target } = e
 
     setTimeout(() => {
       target.style.display = 'none'
     }, 0)
-
 
     this.props.dragStart(e, target.id)
   }
@@ -45,12 +40,13 @@ class Column extends Component {
 
   render() {
 
-    const { title, cards } = this.props
+    const { title, cards, id } = this.props
 
 
 
     return (
-      <div id={this.elId} className="board-column" draggable="true"
+      
+      <div id={this.elId} data-id={id} className="board-column" draggable="true"
         onDragEnd={this.onDragEnd}
         onDrag={this.onDrag}
         onDragStart={this.onDragStart}
@@ -62,7 +58,7 @@ class Column extends Component {
             {
               cards.map(card =>
                 <li key={card._id}>
-                  <Card name={card.name} />
+                  <Card name={card.name} id={card._id} />
                 </li>)
             }
           </ul>
