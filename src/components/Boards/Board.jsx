@@ -51,20 +51,22 @@ class Board extends Component {
         }
         closestWrapper.classList.add('active');
 
-    
-        
         const closestCol = [...closestWrapper.getElementsByClassName('board-column')].pop()
 
-        // switch closest coll if ot is not dragged
-        if (closestCol && closestCol != this.state.draggedCol) {
-            const notActive = [...document.getElementsByClassName(COLUM_WRAPPER_CLASS_NAME)]
-                .filter(wrapper => wrapper != closestWrapper)
-
-            const closestEmpty = this.getClosestWrapper(x, y, notActive)
-
-            // todo: switch elements
-            console.log(closestEmpty)
+        // if x y not 0
+        if (x + y) {
+            // switch closest coll if it is not dragged
+            if (this.state.draggedCol && closestCol && closestCol != this.state.draggedCol) {
+                const closestWrapper = closestCol.parentNode
+                const draggedWrapper = this.state.draggedCol.parentNode
+                
+                if (closestWrapper.classList.contains('active')) {
+                    closestWrapper.appendChild(this.state.draggedCol)
+                    draggedWrapper.appendChild(closestCol)
+                }
+            }
         }
+
 
     }
 
@@ -83,11 +85,6 @@ class Board extends Component {
             .pop()
     }
 
-    dropColumn = e => {
-
-        console.log(e)
-    }
-
 
     colDragStart = (e, elId) => {
         this.setState({
@@ -100,13 +97,11 @@ class Board extends Component {
         this.state.colWrappersOnDrag.map(el => el.classList.remove('active'))
     }
 
-    dragEnd = e => {
-
-
-
+    dragEnd = () => {
         this.setState({
             draggedCol: null,
-            colWrappersOnDrag: []
+            colWrappersOnDrag: [],
+            nextTick: null
         })
         this.removeActiveFromWrappers()
     }
