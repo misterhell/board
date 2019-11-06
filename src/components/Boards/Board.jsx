@@ -43,18 +43,33 @@ class Board extends Component {
             .pop()
 
         // find closest wrapper to drag cursor
-        const closestWrapper = this.getClosestWrapper(x, y)
+        const closestWrapper = this.getClosestWrapper(x, y, this.state.colWrappersOnDrag)
 
 
         if (activeWrapper && activeWrapper != closestWrapper) {
             activeWrapper.classList.remove('active')
-            return 
         }
-        closestWrapper.classList.add('active')    
+        closestWrapper.classList.add('active');
+
+    
+        
+        const closestCol = [...closestWrapper.getElementsByClassName('board-column')].pop()
+
+        // switch closest coll if ot is not dragged
+        if (closestCol && closestCol != this.state.draggedCol) {
+            const notActive = [...document.getElementsByClassName(COLUM_WRAPPER_CLASS_NAME)]
+                .filter(wrapper => wrapper != closestWrapper)
+
+            const closestEmpty = this.getClosestWrapper(x, y, notActive)
+
+            // todo: switch elements
+            console.log(closestEmpty)
+        }
+
     }
 
-    getClosestWrapper(x, y) {
-        return this.state.colWrappersOnDrag
+    getClosestWrapper(x, y, wrappers) {
+        return wrappers
             .map(el => ({
                 el: el,
                 range: Math.abs(el.offsetLeft - x) + Math.abs(el.offsetTop - y)
@@ -81,7 +96,7 @@ class Board extends Component {
         })
     }
 
-    removeActiveFromWrappers () {
+    removeActiveFromWrappers() {
         this.state.colWrappersOnDrag.map(el => el.classList.remove('active'))
     }
 
