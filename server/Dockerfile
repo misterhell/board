@@ -1,4 +1,4 @@
-FROM node:latest
+FROM node:slim
 RUN mkdir -p /usr/src/app
 RUN npm install
 EXPOSE 3300

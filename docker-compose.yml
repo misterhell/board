@@ -3,9 +3,9 @@ services:
 
   api:
     restart: always
-    build: .
+    build: ./server
     volumes: 
-      - ./:/usr/src/app
+      - ./server:/usr/src/app
     working_dir: /usr/src/app
     command: npm run start
     ports:
@@ -18,7 +18,7 @@ services:
       MONGO_INITDB_ROOT_PASSWORD: password
       MONGO_INITDB_DATABASE: app
     volumes:
-      - ./data:/data/db
+      - ./server/data:/data/db
     ports:
       - 27017:27017
 
@@ -30,3 +30,13 @@ services:
     environment:
       ME_CONFIG_MONGODB_ADMINUSERNAME: root
       ME_CONFIG_MONGODB_ADMINPASSWORD: password
+
+  app:
+    restart: always
+    build: .
+    volumes:
+      - .:/usr/src/app
+    working_dir: /usr/src/app
+    command: yarn start
+    ports:
+      - 3000:3000
