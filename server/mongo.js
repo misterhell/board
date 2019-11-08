@@ -1,10 +1,6 @@
+const mongoose = require('mongoose')
+
 const { MONGO_URL, MONGO_CONNECTION_OPTIONS, DB_NAME } = require('./params')
-
-
-const mongoose = require('mongoose');
-
-const Board = require('./models/board')
-
 
 class Mongo {
 
@@ -12,23 +8,17 @@ class Mongo {
         mongoose.connect(MONGO_URL, MONGO_CONNECTION_OPTIONS);
         this.db = mongoose.connection.useDb(DB_NAME)
         this.db
-            .on('error', console.error.bind(console, 'connection error:'));
+            .on('error', console.error.bind(console, 'connection error:'))
     }
 
 
     createBoard(board) {
-        return Board.create(board)
+        // return 
     }
 
 
     fetchBoards() {
-        // return this.connectToDb()
-        //     .then(
-        //         db => db.collection('boards')
-        //             .find()
-        //             .toArray()
-        //     )
-        //     .catch(errFn)
+        // return 
     }
 
 
