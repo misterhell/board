@@ -1,6 +1,7 @@
 import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types'
-import Card from 'components/Cards/Card';
+import Card from 'components/Card';
+import AddCard from 'components/AddCard';
 
 
 class Column extends Component {
@@ -64,7 +65,7 @@ class Column extends Component {
           </ul>
         </div>
         <div className="col-footer">
-            
+            <AddCard />
         </div>
       </div>
     );

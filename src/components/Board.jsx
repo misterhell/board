@@ -2,9 +2,9 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { openBoard, fetchAndOpen } from 'store/boards/actions'
 
-import Column from 'components/Columns/Column'
-import AddColumn from 'components/Columns/AddColumn'
-import ColumnWrapper from 'components/Columns/ColumnWrapper'
+import Column from 'components/Column'
+import AddColumn from 'components/AddColumn'
+import ColumnWrapper from 'components/ColumnWrapper'
 import PropTypes from 'prop-types';
 
 import { COLUM_WRAPPER_CLASS_NAME } from 'constants/columns'
