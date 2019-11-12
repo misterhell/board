@@ -1,6 +1,9 @@
 const router = require('express').Router()
 
-const Board = require('../models/board')
+const Board = require('../../models/board')
+
+// const { COLUMN } = require('../../models/model-names')
+
 
 router.post('/create', ({ body: board }, res) => {
     Board.create(board)
@@ -11,6 +14,7 @@ router.post('/create', ({ body: board }, res) => {
 
 router.get('/', (req, res) => {
     Board.find()
+        .populate('columns')
         .exec()
         .then(boards => res.json(boards))
 })

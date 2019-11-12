@@ -3,25 +3,28 @@ const express = require('express')
 const app = express()
 
 
-
-const BoardsRoutes = require('./routes/boards')
-
-
 const DB = require('./mongo')
+
+
+const { apiRoutes } = require('./routes')
+
+
+
 
 
 app.use(express.urlencoded(), express.json())
 
 
-app.use('/api/boards', BoardsRoutes)
+
+for (let route in apiRoutes) {
+  app.use(`/api/${route}`, apiRoutes[route])
+}
+
 
 app.get('/', (req, res) => {
-  return res.send('Hello World!!!!') 
+  return res.send('Hello World!!!!')
 })
 
-app.get('/', (req, res) => {
-  return res.send('Hello World!!!!') 
-})
 
 
 app.listen(port, () => console.log(`EXPRESS APP LISTEN ${port}!`))

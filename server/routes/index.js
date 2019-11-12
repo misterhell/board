@@ -1,9 +1,11 @@
-const router = require('express').Router()
+const BoardsRoutes = require('./api/boards')
+const ColumnsRoutes = require('./api/columns')
 
 
 
 
 
-
-
-module.exports = router
+module.exports.apiRoutes = {
+    'boards' : BoardsRoutes,
+    'columns': ColumnsRoutes
+}

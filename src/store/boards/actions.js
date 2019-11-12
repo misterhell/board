@@ -3,6 +3,9 @@ export const NEW_BOARD = 'NEW_BOARD'
 export const OPEN_BOARD = 'OPEN_BOARD'
 export const DELETE_BOARD = 'DELETE_BOARD'
 
+export const NEW_COLUMN = 'NEW_COLUMN'
+
+
 
 const postParams = {
     method: 'post',
@@ -42,9 +45,8 @@ export const addBoard = board =>
 export const openBoard = boardId =>
     dispatch => dispatch({
         type: OPEN_BOARD,
-        payload: {
-            boardId
-        }
+        payload: boardId
+
     })
 
 export const fetchAndOpen = boardId =>
@@ -52,3 +54,15 @@ export const fetchAndOpen = boardId =>
         .then(() => dispatch(openBoard(boardId)))
 
 
+export const createColumn = (column, boardId) =>
+    dispatch => fetch('/api/columns/create', {
+        ...postParams,
+        body: JSON.stringify({ column, boardId })
+    })
+        .then(res => res.json())
+        .then(col =>
+            dispatch({
+                type: NEW_COLUMN,
+                payload: col
+            })
+        )

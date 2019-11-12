@@ -40,7 +40,7 @@ class Column extends Component {
 
   render() {
 
-    const { title, cards, id } = this.props
+    const { name, cards, _id: id } = this.props.column
 
 
 
@@ -51,7 +51,7 @@ class Column extends Component {
         onDrag={this.onDrag}
         onDragStart={this.onDragStart}
       >
-        <div> column: {title} </div>
+        <div className="col-header"> column: {name} </div>
         <div>
           cards:
           <ul>
@@ -62,6 +62,9 @@ class Column extends Component {
                 </li>)
             }
           </ul>
+        </div>
+        <div className="col-footer">
+            
         </div>
       </div>
     );

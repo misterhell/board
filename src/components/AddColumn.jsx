@@ -1,4 +1,7 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux'
+import { createColumn } from 'store/boards/actions'
+
 
 class AddColumn extends Component {
 
@@ -7,7 +10,7 @@ class AddColumn extends Component {
     value: ''
   }
 
-  
+
   state = {
     ...this.defaultState
   }
@@ -28,7 +31,7 @@ class AddColumn extends Component {
 
   addNewColumn = ev => {
     if (this.state.value !== '') {
-      console.log('add!', this.props.boardId)
+      this.props.createColumn({ name: this.state.value }, this.props.board._id)
     }
   }
 
@@ -68,4 +71,13 @@ class AddColumn extends Component {
   }
 }
 
-export default AddColumn;
+
+const mapStateProps = state => ({
+  board: state.boards.selected,
+}) 
+
+const mapActions = {
+  createColumn
+}
+
+export default connect(mapStateProps, mapActions)(AddColumn);
