@@ -40,22 +40,15 @@ class Column extends Component {
 
 
   render() {
-
     const { name, cards, _id: id } = this.props.column
 
+    let cardsList
 
-
-    return (
-      
-      <div id={this.elId} data-id={id} className="board-column" draggable="true"
-        onDragEnd={this.onDragEnd}
-        onDrag={this.onDrag}
-        onDragStart={this.onDragStart}
-      >
-        <div className="col-header"> column: {name} </div>
+    if (cards && cards.length) {
+      cardsList = (
         <div>
           cards:
-          <ul>
+              <ul>
             {
               cards.map(card =>
                 <li key={card._id}>
@@ -64,8 +57,22 @@ class Column extends Component {
             }
           </ul>
         </div>
+      )
+    }
+
+    return (
+
+      <div id={this.elId} data-id={id} className="board-column" draggable="true"
+        onDragEnd={this.onDragEnd}
+        onDrag={this.onDrag}
+        onDragStart={this.onDragStart}
+      >
+        <div className="col-header"> column: {name} </div>
+        <div>
+          {cardsList}
+        </div>
         <div className="col-footer">
-            <AddCard columnId={id}/>
+          <AddCard columnId={id} />
         </div>
       </div>
     );

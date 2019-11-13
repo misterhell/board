@@ -34,6 +34,9 @@ class CreateCard extends Component {
       this.props.addNewCard(this.props.columnId, {
         name: this.state.name
       })
+        .then(() => {
+          this.setState(this.defaultState)
+        })
     }
   }
 

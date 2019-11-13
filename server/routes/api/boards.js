@@ -2,8 +2,7 @@ const router = require('express').Router()
 
 const Board = require('../../models/board')
 
-// const { COLUMN } = require('../../models/model-names')
-
+const DB = require('../../mongo')
 
 router.post('/create', async ({ body: board }, res) => {
     const createdBoard = await Board.create(board)

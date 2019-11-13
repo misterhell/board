@@ -3,7 +3,6 @@ const express = require('express')
 const app = express()
 
 
-const DB = require('./mongo')
 
 
 const { apiRoutes } = require('./routes')

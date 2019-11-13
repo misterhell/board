@@ -11,19 +11,6 @@ class Mongo {
             .on('error', console.error.bind(console, 'connection error:'))
     }
 
-
-    createBoard(board) {
-        // return 
-    }
-
-
-    fetchBoards() {
-        // return 
-    }
-
-
-
-
 }
 
 

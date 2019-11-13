@@ -39,16 +39,18 @@ export default (state = initialState, action) => {
             }
 
         case NEW_CARD:
-            const selectedBoard = { ...state.selected },
-                { _id: colId } = action.payload.column
+            const selectedBoard = { ...state.selected }
+            const colId = action.payload.column._id
 
             selectedBoard.columns.map((el, i, arr) => {
                 if (el._id == colId) {
                     arr[i].cards.push(action.payload)
                 }
             })
+
             return {
                 ...state,
+                selected: selectedBoard
             }
 
         default:
