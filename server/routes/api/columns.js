@@ -4,34 +4,21 @@ const Board = require('../../models/board')
 
 
 
-router.post('/create', (req, res) => {
+router.post('/create', async (req, res) => {
     const { body } = req,
-        { boardId, column: reqColumn } = body
+        { boardId, column: columnData } = body
 
-    Board.findById(boardId).exec()
-        .then(board => {
-            Column.create({ ...reqColumn, board: board })
-                .then(c => {
-                    board.columns.push(c)
-                    board.save()
-                        .then(() => {
-                            res.json(c)
-                        })
-                })
-        })
-})
+    const board = await Board.findById(boardId).exec(),
+        col = await Column.create({ ...columnData, board: board })
 
-router.get('/', (req, res) => {
-    Column.find()
-        .populate('board')
-        .exec()
-        .then(columns => res.json(columns))
-})
+    if (board && col) {
+        board.columns.push(col)
+        await board.save()
+        res.json(col)
+    }
 
+    res.json(null)
 
-router.get('/show/:id', (req, res) => {
-
-    res.json(req.params.id)
 })
 
 

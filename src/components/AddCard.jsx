@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux'
 
-
-
+import { addNewCard } from '../store/boards/actions'
 
 
 class CreateCard extends Component {
 
   defaultState = {
     addingNew: false,
-    value: ''
+    name: ''
   }
 
 
@@ -26,12 +26,14 @@ class CreateCard extends Component {
   }
 
   onInputChange = ev => this.setState({
-    value: ev.target.value
+    name: ev.target.value
   })
 
   addNewCard = () => {
-    if (this.state.value !== '') {
-      console.log(this.state.value)
+    if (this.state.name !== '') {
+      this.props.addNewCard(this.props.columnId, {
+        name: this.state.name
+      })
     }
   }
 
@@ -46,15 +48,15 @@ class CreateCard extends Component {
     if (this.state.addingNew) {
       return (
         <React.Fragment>
-                <input autoFocus type="text" value={this.state.value} onChange={this.onInputChange} />
+          <input autoFocus type="text" name="name" value={this.state.name} placeholder="card name" onChange={this.onInputChange} />
 
-                <div>
-                  <button className="btn btn-primary"
-                    onClick={this.addNewCard}>
-                    Create
-                  </button>
-                  <button className="btn btn-secondary" onClick={this.onAddingHide}>x</button>
-                </div>
+          <div>
+            <button className="btn btn-primary"
+              onClick={this.addNewCard}>
+              Create
+            </button>
+            <button className="btn btn-secondary" onClick={this.onAddingHide}>x</button>
+          </div>
         </React.Fragment>
       )
     }
@@ -68,4 +70,13 @@ class CreateCard extends Component {
   }
 }
 
-export default CreateCard;
+
+const mapStateProps = state => ({
+  board: state.boards.selected,
+})
+
+const mapActions = {
+  addNewCard
+}
+
+export default connect(mapStateProps, mapActions)(CreateCard);

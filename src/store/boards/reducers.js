@@ -1,4 +1,4 @@
-import { FETCH_BOARDS, NEW_BOARD, OPEN_BOARD, NEW_COLUMN } from './actions'
+import { FETCH_BOARDS, NEW_BOARD, OPEN_BOARD, NEW_COLUMN, NEW_CARD } from './actions'
 
 
 const initialState = {
@@ -36,6 +36,19 @@ export default (state = initialState, action) => {
                     ...state.selected,
                     columns
                 }
+            }
+
+        case NEW_CARD:
+            const selectedBoard = { ...state.selected },
+                { _id: colId } = action.payload.column
+
+            selectedBoard.columns.map((el, i, arr) => {
+                if (el._id == colId) {
+                    arr[i].cards.push(action.payload)
+                }
+            })
+            return {
+                ...state,
             }
 
         default:

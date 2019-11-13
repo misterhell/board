@@ -5,23 +5,31 @@ const Board = require('../../models/board')
 // const { COLUMN } = require('../../models/model-names')
 
 
-router.post('/create', ({ body: board }, res) => {
-    Board.create(board)
-        .then(b => {
-            res.json(b)
-        })
+router.post('/create', async ({ body: board }, res) => {
+    const createdBoard = await Board.create(board)
+
+    if (createdBoard) {
+        res.json(createdBoard)
+    }
+    res.json(null)
 })
 
-router.get('/', (req, res) => {
-    Board.find()
-        .populate('columns')
+router.get('/', async (req, res) => {
+    const boards = await Board.find()
+        .populate({
+            path: 'columns',
+            populate: {
+                path: 'cards'
+            }
+        })
         .exec()
-        .then(boards => res.json(boards))
+
+    res.json(boards)
 })
 
 
 router.get('/show/:id', (req, res) => {
-    
+
     res.json(req.params.id)
 })
 

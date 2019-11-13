@@ -5,6 +5,9 @@ export const DELETE_BOARD = 'DELETE_BOARD'
 
 export const NEW_COLUMN = 'NEW_COLUMN'
 
+export const NEW_CARD = 'NEW_CARD'
+
+
 
 
 const postParams = {
@@ -66,3 +69,17 @@ export const createColumn = (column, boardId) =>
                 payload: col
             })
         )
+
+
+export const addNewCard = (columnId, card) =>
+    dispatch => fetch('/api/cards/create', {
+        ...postParams,
+        body: JSON.stringify({ columnId, card })
+    })
+        .then(resp => resp.json())
+        .then(card => {
+            dispatch({
+                type: NEW_CARD,
+                payload: card
+            })
+        })

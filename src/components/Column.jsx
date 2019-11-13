@@ -65,7 +65,7 @@ class Column extends Component {
           </ul>
         </div>
         <div className="col-footer">
-            <AddCard />
+            <AddCard columnId={id}/>
         </div>
       </div>
     );
