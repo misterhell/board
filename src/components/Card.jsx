@@ -9,9 +9,16 @@ export default class Card extends Component {
   }
 
   render() {
-    const { name } = this.props
+    const { name, body } = this.props
     return (
-      <span onDragStart={this.onDrag}> {name} </span>
+      <div className="card" onDragStart={this.onDrag}>
+        <div className="card-name">
+          {name}
+        </div>
+        <div className="card-body">
+          { body || '-'}
+        </div>
+      </div>
     );
   }
 }

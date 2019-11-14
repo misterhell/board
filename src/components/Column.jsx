@@ -2,7 +2,7 @@ import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types'
 import Card from 'components/Card';
 import AddCard from 'components/AddCard';
-
+import CardWrapper from 'components/CardWrapper'
 
 class Column extends Component {
 
@@ -46,17 +46,15 @@ class Column extends Component {
 
     if (cards && cards.length) {
       cardsList = (
-        <div>
-          cards:
-              <ul>
-            {
-              cards.map(card =>
-                <li key={card._id}>
-                  <Card name={card.name} id={card._id} />
-                </li>)
-            }
-          </ul>
-        </div>
+        <Fragment>
+          {
+            cards.map(card =>
+              <CardWrapper key={card._id}>
+                <Card name={card.name} id={card._id} />
+              </CardWrapper>
+            )
+          }
+        </Fragment>
       )
     }
 
