@@ -58,8 +58,10 @@ class Column extends Component {
       )
     }
 
-    return (
 
+
+    
+    return (
       <div id={this.elId} data-id={id} className="board-column" draggable="true"
         onDragEnd={this.onDragEnd}
         onDrag={this.onDrag}

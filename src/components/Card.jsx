@@ -8,15 +8,18 @@ export default class Card extends Component {
     e.stopPropagation()
   }
 
+
+  
+
   render() {
     const { name, body } = this.props
     return (
-      <div className="card" onDragStart={this.onDrag}>
+      <div draggable="true" className="card" onDrag={this.onDrag} >
         <div className="card-name">
           {name}
         </div>
         <div className="card-body">
-          { body || '-'}
+          {body || '-'}
         </div>
       </div>
     );

@@ -26,6 +26,11 @@ class Board extends Component {
 
 
     componentDidMount() {
+        this.openBoard()
+    }
+
+
+    openBoard() {
         const boardId = this.props.match.params.id
         const isBoardsLoaded = !this.props.allBoards || !this.props.allBoards.length
 
@@ -93,12 +98,13 @@ class Board extends Component {
         })
     }
 
-    removeActiveFromWrappers() {
+
+    removeActiveClassFromWrappers() {
         this.state.colWrappersOnDrag.map(el => el.classList.remove('active'))
     }
 
     dragEnd = () => {
-        this.removeActiveFromWrappers()
+        this.removeActiveClassFromWrappers()
         this.setState({
             draggedCol: null,
             colWrappersOnDrag: [],
