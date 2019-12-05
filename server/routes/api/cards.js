@@ -3,9 +3,6 @@ const router = require('express').Router()
 const Card = require('../../models/card')
 const Column = require('../../models/column')
 
-const DB = require('../../mongo')
-
-
 
 router.post('/create', async ({ body }, res) => {
     const { card: newCard, columnId } = body
