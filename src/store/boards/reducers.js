@@ -42,8 +42,8 @@ export default (state = initialState, action) => {
             const selectedBoard = { ...state.selected }
             const colId = action.payload.column._id
 
-            selectedBoard.columns.map((el, i, arr) => {
-                if (el._id == colId) {
+            selectedBoard.columns.forEach((el, i, arr) => {
+                if (el._id === colId) {
                     arr[i].cards.push(action.payload)
                 }
             })

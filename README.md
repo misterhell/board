@@ -1,6 +1,6 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Small test project to know how works react, redux store and mongodb
+## React, redux store and mongodb
 
 In the project directory run:
 
@@ -13,4 +13,3 @@ Runs the app in the development mode.<br />
 Open [http://localhost:3000](http://localhost:3000) to view app in the browser.
 
 Open [http://localhost:8081](http://localhost:8081) to view mongo-express.
-
