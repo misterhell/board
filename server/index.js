@@ -11,7 +11,8 @@ const { apiRoutes } = require('./routes')
 
 
 
-app.use(express.urlencoded(), express.json())
+app.use(express.urlencoded({ extended: false }))
+app.use(express.json())
 
 
 

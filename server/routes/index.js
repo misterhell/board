@@ -3,10 +3,8 @@ const ColumnsRoutes = require('./api/columns')
 const CardsRoutes = require('./api/cards')
 
 
-
-
 module.exports.apiRoutes = {
-    'boards' : BoardsRoutes,
+    'boards': BoardsRoutes,
     'columns': ColumnsRoutes,
     'cards': CardsRoutes
 }

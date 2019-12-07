@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import BoardsList from 'components/BoardsList';
-import Board from 'components/Board'
+import BoardsList from 'pages/BoardsList';
+import Board from 'pages/Board'
 
 
 import {
@@ -23,8 +23,8 @@ class Router extends Component {
                     </Route>
 
                     <Route exact path="/board/:id" component={Board} />
-                        
-                    
+
+
                     <Route path="*">
                         <NoMatch />
                     </Route>
@@ -35,7 +35,7 @@ class Router extends Component {
 }
 
 
-function NoMatch () {
+function NoMatch() {
     return (
         <div>
             <h1>404</h1>

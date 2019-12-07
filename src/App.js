@@ -6,7 +6,7 @@ import thunk from 'redux-thunk';
 import rootReducer from 'store/reducers'
 
 
-import Router from 'components/Router'
+import Router from 'routes/Router'
 import Nav from 'components/Navbar'
 
 

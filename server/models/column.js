@@ -7,7 +7,6 @@ const { COLUMN, BOARD, CARD } = require('./model-names')
 const ColumnSchema = new mongoose.Schema({
     _id: {
         type: Schema.Types.ObjectId,
-        index: true,
         required: true,
         auto: true,
     },

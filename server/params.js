@@ -1,5 +1,5 @@
 module.exports = {
-    PORT: 3300,
+    PORT: 8080,
     MONGO_URL: 'mongodb://mongo:27017',
     MONGO_CONNECTION_OPTIONS: {
         useUnifiedTopology: true,

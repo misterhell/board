@@ -2,8 +2,8 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { fetchBoards } from "store/boards/actions";
-import BoardWrapper from "./BoardWrapper";
-import CreateNewBoard from "./BoardCreate";
+import BoardWrapper from "components/BoardWrapper";
+import CreateNewBoard from "components/BoardCreate";
 
 class BoardsList extends Component {
   componentDidMount() {
