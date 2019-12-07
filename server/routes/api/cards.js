@@ -14,11 +14,11 @@ router.post('/create', async ({ body }, res) => {
             const card = await Card.create({ ...newCard, column: col })
             col.cards.push(card)
             await col.save()
-            res.json(card)
+            return res.json(card)
         }
 
     } catch (e) {
-        res.json(e)
+        return res.json(e)
     }
 
     res.json(null)

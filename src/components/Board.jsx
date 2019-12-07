@@ -9,7 +9,7 @@ import PropTypes from "prop-types";
 
 import { COLUM_WRAPPER_CLASS_NAME, BOARD_COLUMN_CLASS_NAME } from "constants.js";
 
-import { DRAG_CARD_EVENT_NAME, DRAG_COLUMN_EVENT_NAME } from "../constants";
+import { DRAG_CARD_EVENT_NAME, DRAG_COLUMN_EVENT_NAME, CARD_WRAPPER_CLASS_NAME } from "../constants";
 
 class Board extends Component {
   static propTypes = {
@@ -49,14 +49,41 @@ class Board extends Component {
 
 
 
-  // cardDragEvent(e) {
-  //   const { clientX: x, clientY: y } = e;
+  cardDragEvent(e) {
+    const { clientX: x, clientY: y } = e;
 
-  //   const closestColumn
+    // find closest wrapper to drag cursor
+    const closestWrapper = this.getClosestElement({ x, y },
+      this.state.colWrappersOnDrag
+    )
 
+    this.deletePrevCWrapperByClasses(`.${CARD_WRAPPER_CLASS_NAME}.active`)
+    const columnCards = [...closestWrapper.getElementsByClassName(CARD_WRAPPER_CLASS_NAME)]
 
+    // if column not empty
+    if (columnCards.length) {
+      // create wrapper before closes element
+      this.createNewCardWrapper(this.getClosestElement({ x, y }, columnCards))
+    } else {
+      // [0] because there are only one col in the wrapper
+      const column = closestWrapper.getElementsByClassName('col-body')[0]
+      this.createNewCardWrapper(column)
+    }
+  }
 
-  // }
+  createNewCardWrapper(toElement) {
+    const wrapper = document.createElement('div')
+    wrapper.classList.add(CARD_WRAPPER_CLASS_NAME, 'active')
+    toElement.parentNode.insertBefore(wrapper, toElement)
+  }
+
+  deletePrevCWrapperByClasses(classes) {
+    const prevWrapper = document.querySelector(classes)
+    if (prevWrapper) {
+      prevWrapper.parentNode.removeChild(prevWrapper)
+    }
+    return this
+  }
 
 
   columnDragEvent(e) {
@@ -70,9 +97,7 @@ class Board extends Component {
       .pop();
 
     // find closest wrapper to drag cursor
-    const closestWrapper = this.getClosestElement(
-      x,
-      y,
+    const closestWrapper = this.getClosestElement({ x, y },
       this.state.colWrappersOnDrag
     );
 
@@ -104,8 +129,8 @@ class Board extends Component {
     }
   }
 
-  getClosestElement(x, y, wrappers) {
-    return wrappers
+  getClosestElement({ x, y }, elements) {
+    return elements
       .map(el => ({
         el: el,
         range: Math.abs(el.offsetLeft - x) + Math.abs(el.offsetTop - y)
@@ -130,14 +155,21 @@ class Board extends Component {
 
 
   removeActiveClassFromWrappers() {
-    this.state.colWrappersOnDrag.map(el => el.classList.remove("active"));
+    this.state.colWrappersOnDrag.forEach(el => el.classList.remove("active"));
     return this
   }
 
-  dragEnd = () => {
-    this.removeActiveClassFromWrappers()
-      .rearrangeCols();
+  applyCardsTransition() {
+    return this
+  }
 
+  dragEnd = dragType => {
+    console.log(dragType)
+    this.removeActiveClassFromWrappers()
+      .applyCardsTransition()
+      .rearrangeColsAndCards();
+
+    console.log('end')
     this.setState({
       draggedCol: null,
       colWrappersOnDrag: [],
@@ -145,7 +177,10 @@ class Board extends Component {
     });
   };
 
-  rearrangeCols() { }
+  rearrangeColsAndCards() {
+    return this
+  }
+
 
   render() {
     const { board } = this.props;

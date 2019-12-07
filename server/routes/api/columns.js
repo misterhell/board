@@ -2,8 +2,6 @@ const router = require('express').Router()
 const Column = require('../../models/column')
 const Board = require('../../models/board')
 
-const DB = require('../../mongo')
-
 
 
 router.post('/create', async ({ body }, res) => {
@@ -15,11 +13,10 @@ router.post('/create', async ({ body }, res) => {
     if (board && col) {
         board.columns.push(col)
         await board.save()
-        res.json(col)
+        return res.json(col)
     }
 
     res.json(null)
-
 })
 
 
