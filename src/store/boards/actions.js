@@ -83,3 +83,9 @@ export const addNewCard = (columnId, card) =>
                 payload: card
             })
         })
+
+export const rearrangeAll = (boardId, colsAndCards) =>
+    dispatch => fetch('/api/board/rearrange-all', {
+        ...postParams,
+        body: JSON.stringify({ boardId, colsAndCards })
+    })

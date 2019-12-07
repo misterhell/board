@@ -1,8 +1,8 @@
 const router = require('express').Router()
 
 const Board = require('../../models/board')
+const Column = require('../../models/column')
 
-const DB = require('../../mongo')
 
 router.post('/create', async ({ body: board }, res) => {
     const createdBoard = await Board.create(board)
@@ -24,6 +24,17 @@ router.get('/', async (req, res) => {
         .exec()
 
     res.json(boards)
+})
+
+router.post('/rearrange-all', async ({ body: { colsAndCards, boardId } }, res) => {
+    const board = await Board.find(boardId)
+
+    const cols = await Column.findById(Object.keys(colsAndCards))
+
+    // if (createdBoard) {
+    //     res.json(createdBoard)
+    // }
+    res.json(null)
 })
 
 

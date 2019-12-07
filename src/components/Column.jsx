@@ -18,7 +18,7 @@ class Column extends Component {
     const { target } = e;
 
     setTimeout(() => {
-      target.classList.add('display-none');
+      target.classList.add('display-none', 'is-dragged');
     }, 0);
 
     this.props.dragStart(e, target);
@@ -41,7 +41,7 @@ class Column extends Component {
     const { target } = e;
     e.stopPropagation();
     setTimeout(() => {
-      target.classList.remove('display-none');
+      target.classList.remove('display-none', 'is-dragged');
     }, 0);
 
     this.props.dragEnd(dragType);

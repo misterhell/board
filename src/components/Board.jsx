@@ -1,15 +1,20 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { openBoard, fetchAndOpen } from "store/boards/actions";
+import { openBoard, fetchAndOpen, rearrangeAll } from "store/boards/actions";
 
 import Column from "components/Column";
 import AddColumn from "components/AddColumn";
 import ColumnWrapper from "components/ColumnWrapper";
 import PropTypes from "prop-types";
 
-import { COLUM_WRAPPER_CLASS_NAME, BOARD_COLUMN_CLASS_NAME } from "constants.js";
+import {
+  COLUM_WRAPPER_CLASS_NAME,
+  BOARD_COLUMN_CLASS_NAME,
+  CARD_WRAPPER_CLASS_NAME,
+  DRAG_CARD_EVENT_NAME,
+  DRAG_COLUMN_EVENT_NAME,
+} from "constants.js";
 
-import { DRAG_CARD_EVENT_NAME, DRAG_COLUMN_EVENT_NAME, CARD_WRAPPER_CLASS_NAME } from "../constants";
 
 class Board extends Component {
   static propTypes = {
@@ -77,6 +82,7 @@ class Board extends Component {
     toElement.parentNode.insertBefore(wrapper, toElement)
   }
 
+  // delete old card wrapper
   deletePrevCWrapperByClasses(classes) {
     const prevWrapper = document.querySelector(classes)
     if (prevWrapper) {
@@ -159,17 +165,27 @@ class Board extends Component {
     return this
   }
 
-  applyCardsTransition() {
+  applyCardsTransition(dragType) {
+    const draggedCard = document.querySelector('.card.is-dragged')
+    if (draggedCard) {
+      const oldParent = draggedCard.parentNode,
+        newParent = document.querySelector(`.${CARD_WRAPPER_CLASS_NAME}.active`)
+
+      newParent.appendChild(draggedCard)
+      oldParent.parentNode.removeChild(oldParent)
+
+      draggedCard
+        .parentNode
+        .classList.remove('active')
+    }
     return this
   }
 
   dragEnd = dragType => {
-    console.log(dragType)
     this.removeActiveClassFromWrappers()
       .applyCardsTransition()
       .rearrangeColsAndCards();
 
-    console.log('end')
     this.setState({
       draggedCol: null,
       colWrappersOnDrag: [],
@@ -177,7 +193,21 @@ class Board extends Component {
     });
   };
 
+  // collect new information about columns and cards
   rearrangeColsAndCards() {
+    const colsWrappers = [...document.getElementsByClassName(COLUM_WRAPPER_CLASS_NAME)]
+    const colsWithCards = {}
+
+    colsWrappers.forEach(colW => {
+      const col = colW.childNodes[0]
+      colsWithCards[col.dataset.id] =
+        [...col.getElementsByClassName('card')]
+          .map(card => card.dataset.id)
+    })
+
+    // apply new information
+    this.rearrangeAll(colsWithCards)
+
     return this
   }
 
@@ -224,7 +254,8 @@ const mapStateProps = state => ({
 
 const mapActions = {
   openBoard,
-  fetchAndOpen
+  fetchAndOpen,
+  rearrangeAll
 };
 
 export default connect(mapStateProps, mapActions)(Board);
